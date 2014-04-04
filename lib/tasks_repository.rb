@@ -16,6 +16,9 @@ class TasksRepository
 
   def update(id, name)
     @tasks_table.where(:id => id).update(name)
+  end
 
+  def delete(id)
+    @tasks_table.where(:id => id).delete
   end
 end
