@@ -13,4 +13,9 @@ class TasksRepository
   def display_all
     @tasks_table.all
   end
+
+  def update(id, name)
+    @tasks_table.where(:id => id).update(name)
+
+  end
 end
