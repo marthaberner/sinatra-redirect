@@ -23,13 +23,13 @@ describe 'it manages tasks' do
                                     ]
   end
   it 'allows a user to update information in the database' do
-      tasks = TasksRepository.new(@db)
-      tasks.insert({:name => 'Get milk'})
-      tasks.insert({:name => 'Get eggs'})
-      tasks.update(1, {:name => 'Get juice'})
-      expect(tasks.display_all).to eq [
+    tasks = TasksRepository.new(@db)
+    tasks.insert({:name => 'Get milk'})
+    tasks.insert({:name => 'Get eggs'})
+    tasks.update(1, {:name => 'Get juice'})
+    expect(tasks.display_all).to eq [
                                       {:id => 2, :name => 'Get eggs', :completed => false},
-                                 { :id => 1, :name => 'Get juice', :completed => false }]
+                                      {:id => 1, :name => 'Get juice', :completed => false}]
   end
   it 'allows a user to update information in the database' do
     tasks = TasksRepository.new(@db)
@@ -38,6 +38,14 @@ describe 'it manages tasks' do
     tasks.delete(1)
     expect(tasks.display_all).to eq [
                                       {:id => 2, :name => 'Get eggs', :completed => false}
-                                      ]
+                                    ]
+  end
+  it 'allows a user to find a task according to its id' do
+    tasks = TasksRepository.new(@db)
+    tasks.insert({:name => 'Get milk'})
+    tasks.insert({:name => 'Get eggs'})
+    expected_task = {:id => 2, :name => 'Get eggs', :completed => false}
+    expect(tasks.find(2)).to eq expected_task
   end
 end
+
