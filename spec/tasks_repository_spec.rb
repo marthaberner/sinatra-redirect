@@ -47,5 +47,15 @@ describe 'it manages tasks' do
     expected_task = {:id => 2, :name => 'Get eggs', :completed => false}
     expect(tasks.find(2)).to eq expected_task
   end
+  it 'allows a user to find all of the tasks in the database' do
+    tasks = TasksRepository.new(@db)
+    tasks.insert({:name => 'Get milk'})
+    tasks.insert({:name => 'Get eggs'})
+    expected_task = [
+                      {:id => 1, :name => 'Get milk', :completed => false},
+                      {:id => 2, :name => 'Get eggs', :completed => false}
+                      ]
+    expect(tasks.all).to eq expected_task
+  end
 end
 
